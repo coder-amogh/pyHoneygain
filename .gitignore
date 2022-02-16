@@ -1,0 +1,9 @@
+/env
+/build
+/dist
+*.egg*
+/main.py
+*.pyc
+__pycache__
+/*.py
+!/setup.py
