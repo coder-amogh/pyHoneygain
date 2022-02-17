@@ -53,7 +53,7 @@ class HoneyGain:
 		self.jwt = jwt_token
 		return True
 
-	def set_user_id(self, user_id: str) -> bool:
+	def __set_user_id(self, user_id: str) -> bool:
 		"""Sets user_id which is required for some endpoints. """
 		self.user_id = user_id
 		return True
@@ -95,7 +95,7 @@ class HoneyGain:
 
 		r = self.__make_request("GET", "/users/me")
 
-		self.set_user_id(r.json().get("data", {}).get("id", None))
+		self.__set_user_id(r.json().get("data", {}).get("id", None))
 
 		me_data = r.json().get("data", None)
 
