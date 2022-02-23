@@ -186,6 +186,14 @@ user.set_proxy("ip:port")
     ```
 ---
 
+13. Get balances
+
+    ```PYTHON
+    # Gets balances info
+    user.balances()
+    ```
+---
+
 ## Exceptions
 
 - The following exceptions are defined.

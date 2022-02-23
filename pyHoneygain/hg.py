@@ -173,6 +173,16 @@ class HoneyGain:
 
 		return notifications_data if r.ok else False
 
+	def balances(self):
+		"""Returns balances info. """
+		self.handle_not_logged_in()
+
+		r = self.__make_request("GET", "/users/balances")
+
+		notifications_data = r.json().get("data", {})
+
+		return notifications_data if r.ok else False
+
 	def payouts(self):
 		"""Returns payouts info. """
 		self.handle_not_logged_in()
