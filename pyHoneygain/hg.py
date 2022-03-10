@@ -278,7 +278,9 @@ class HoneyGain:
 						"credits": credits,
 					}
 			
-			time.sleep(2)
+			time.sleep(delay)
+
+			count += 1
 
 		return {
 			"success": False,
