@@ -194,6 +194,14 @@ user.set_proxy("ip:port")
     ```
 ---
 
+14. Open Honeypot
+
+    ```PYTHON
+    # Attempts to open Honeypot
+    user.open_honeypot()
+    ```
+---
+
 ## Exceptions
 
 - The following exceptions are defined.
