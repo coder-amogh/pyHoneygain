@@ -1,4 +1,5 @@
 import requests
+import time
 
 from .exceptions import *
 
@@ -257,6 +258,32 @@ class HoneyGain:
 		})
 
 		return r.ok
+
+	def open_honeypot(self, retry_count = 5, delay = 2):
+		count = 0
+
+		while count < retry_count:
+			notifications = self.notifications()
+
+			for notification in notifications:
+				if notification["template"] == "lucky_pot":
+					self.actions_start_claim_honeypot_process(campaign_id = notification["campaign_id"], notification_hash = notification["hash"])
+
+					credits = self.actions_accept_honeypot()
+
+					self.actions_stop_honeypot_process(campaign_id = notification["campaign_id"], notification_hash = notification["hash"])
+
+					return {
+						"success": True,
+						"credits": credits,
+					}
+			
+			time.sleep(2)
+
+		return {
+			"success": False,
+			"credits": None,
+		}
 
 	def __repr__(self):
 		return f"<HoneyGain Object at: {hex(id(self))}>"
