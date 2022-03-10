@@ -259,7 +259,7 @@ class HoneyGain:
 
 		return r.ok
 
-	def open_honeypot(self, retry_count = 5, delay = 2):
+	def open_honeypot(self, retry_count: int = 5, delay: int = 2):
 		count = 0
 
 		while count < retry_count:
