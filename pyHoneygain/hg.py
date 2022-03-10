@@ -145,7 +145,7 @@ class HoneyGain:
 		"""Returns today's JT earnings/credits info. """
 		self.handle_not_logged_in()
 
-		r = self.__make_request("GET", "/earnings/jt")
+		r = self.__make_request("GET", "/jt-earnings/today")
 
 		stats_today_jt_data = r.json().get("data", None)
 
