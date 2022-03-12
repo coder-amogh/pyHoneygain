@@ -148,7 +148,7 @@ class HoneyGain:
 
 		r = self.__make_request("GET", "/jt-earnings/today")
 
-		stats_today_jt_data = r.json().get("data", None)
+		stats_today_jt_data = r.json()
 
 		return stats_today_jt_data if r.ok else False
 	
@@ -158,7 +158,7 @@ class HoneyGain:
 
 		r = self.__make_request("GET", "/earnings/wallet-stats")
 
-		wallet_stats_data = r.json().get("data", None)
+		wallet_stats_data = r.json()
 
 		return wallet_stats_data if r.ok else False
 
