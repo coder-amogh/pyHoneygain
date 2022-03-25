@@ -58,6 +58,16 @@ class HoneyGain:
 		"""Sets user_id which is required for some endpoints. """
 		self.user_id = user_id
 		return True
+	
+	def signup(self, email:str, password: str, referral:str = "FAZAL14CB0") -> str:
+		"""Creates a new account with the given `email` and `password and links it to `referral``"""
+
+		r = self.__make_request('POST', "/users", json = {
+			'email': email,
+			'password':password,
+			'coupon':referral
+		})
+		return self.set_jwt_token(r.json().get('data').get('access_token')) if r.ok else False
 
 	def login(self, email: str, password: str) -> bool:
 		"""Logs into the system for interacting with the API. """
