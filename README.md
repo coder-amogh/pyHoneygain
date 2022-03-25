@@ -40,6 +40,29 @@ user.login(USERNAME, PASSWORD)
 
 ---
 
+
+### Create a new Honeygain account:
+
+```PYTHON
+from pyHoneygain import HoneyGain
+
+# Your HoneyGain (HG) login username and password
+EMAIL = ""
+PASSWORD = ""
+
+# Initialise the HoneyGain object
+user = HoneyGain()
+
+# Call the signup method
+user.signup(EMAIL, PASSWORD)
+```
+Optionally you can also set the referral code
+```python
+REFERRAL = "REFERRAL CODE"
+user.signup(EMAIL, PASSWORD, REFERRAL)
+```
+---
+
 ### Login with access token (JWT token):
 
 ```PYTHON
