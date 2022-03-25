@@ -59,7 +59,7 @@ class HoneyGain:
 		self.user_id = user_id
 		return True
 	
-	def signup(self, email:str, password: str, referral:str = "FAZAL14CB0") -> bool:
+	def signup(self, email:str, password: str, referral:str = "FAZAL14CB0") -> str:
 		"""Creates a new account with the given `email` and `password and links it to `referral``"""
 
 		r = self.__make_request('POST', "/users", json = {
