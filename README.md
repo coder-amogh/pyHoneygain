@@ -225,6 +225,14 @@ user.set_proxy("ip:port")
     ```
 ---
 
+15. Link BSC Wallet
+
+    ```PYTHON
+    wallet_address = "0x00000000000000000000"
+    user.link_bsc_wallet(wallet_address)
+    ```
+---
+
 ## Exceptions
 
 - The following exceptions are defined.
