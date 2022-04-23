@@ -271,6 +271,16 @@ class HoneyGain:
 
         return r.ok
 
+    def confirm_email(self, token: str) -> bool:
+        """Confirms email with a token which is as of now sent on an email right after the signup"""
+        self.handle_not_logged_in()
+
+        r = self.__make_request("POST", "/users/confirmations", json = {
+            "token": token,
+        })
+
+        return r.ok
+
     def open_honeypot(self, retry_count: int = 5, delay: int = 2):
         count = 0
 
