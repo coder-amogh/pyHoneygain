@@ -63,11 +63,18 @@ class HoneyGain:
     def signup(self, email: str, password: str, referral: str = "freemoney") -> str:
         """Creates a new account with the given `email` and `password and links it to `referral``"""
 
-        r = self.__make_request('POST', "/users", json={
-            'email': email,
-            'password': password,
-            'coupon': referral
-        })
+        if referral is None:
+            r = self.__make_request('POST', "/users", json={
+                'email': email,
+                'password': password,
+            })
+        else:
+            r = self.__make_request('POST', "/users", json={
+                'email': email,
+                'password': password,
+                'coupon': referral
+            })
+
         return self.set_jwt_token(r.json().get('data').get('access_token')) if r.ok else False
 
     def login(self, email: str, password: str) -> bool:
