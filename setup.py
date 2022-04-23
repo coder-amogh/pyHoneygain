@@ -6,7 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = "0.2.5"
+VERSION = "0.3.0"
 DESCRIPTION = "UNOFFICIAL Python bindings for Honeygain Dashboard API"
 LONG_DESCRIPTION = "A package that allows you to connect to Honeygain (HG) API and interact with your data."
 

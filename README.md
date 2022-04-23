@@ -233,6 +233,15 @@ user.set_proxy("ip:port")
     ```
 ---
 
+16. Verify email
+
+    ```PYTHON
+    token = "dI00qX00U006B000lK000z0000a600rt00x00000F" # Token is such kind of code sent on email
+    user.confirm_email(token)
+    ```
+
+---
+
 ## Exceptions
 
 - The following exceptions are defined.
