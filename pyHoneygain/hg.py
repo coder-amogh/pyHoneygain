@@ -276,7 +276,7 @@ class HoneyGain:
         self.handle_not_logged_in()
 
         r = self.__make_request("POST", "/users/confirmations", json = {
-            "token": token,
+            "confirmation_token": token,
         })
 
         return r.ok
