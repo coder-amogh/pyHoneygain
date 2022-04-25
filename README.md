@@ -239,6 +239,17 @@ user.set_proxy("ip:port")
     token = "dI00qX00U006B000lK000z0000a600rt00x00000F" # Token is such kind of code sent on email
     user.confirm_email(token)
     ```
+---
+
+17. Check for a coupon code
+
+    ```PYTHON
+    from pyHoneygain import Honeygain
+
+    Honeygain.coupon("freemoney") # valid (as of Apr 25, 2022)
+    Honeygain.coupon("get5") # expired
+    Honeygain.coupon("get6") # invalid
+    ```
 
 ---
 
