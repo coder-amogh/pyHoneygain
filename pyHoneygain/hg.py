@@ -61,7 +61,7 @@ class HoneyGain:
         return True
 
     def signup(self, email: str, password: str, referral: str = "freemoney") -> str:
-        """Creates a new account with the given `email` and `password and links it to `referral``"""
+        """Creates a new account with the given `email` and `password and links it to `referral`"""
 
         if referral is None:
             r = self.__make_request('POST', "/users", json={
@@ -202,6 +202,12 @@ class HoneyGain:
         notifications_data = r.json().get("data", {})
 
         return notifications_data if r.ok else False
+
+    def coupon(self, coupon_code):
+        """Returns information about a `coupon/referral` code"""
+        r = self.__make_request("GET", f"/coupons/{coupon_code}")
+
+        return r.json()
 
     def payouts(self):
         """Returns payouts info. """
