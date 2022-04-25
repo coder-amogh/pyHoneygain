@@ -3,7 +3,6 @@ import time
 
 from .exceptions import *
 
-
 class HoneyGain:
     def __init__(self, API_PREFIX_URL: str = "/api", API_VERSION: str = "/v1", API_DOMAIN: str = "https://dashboard.honeygain.com") -> None:
         """Initialise HoneyGain API Client. """
@@ -203,9 +202,10 @@ class HoneyGain:
 
         return notifications_data if r.ok else False
 
-    def coupon(self, coupon_code):
+    @staticmethod
+    def coupon(coupon_code):
         """Returns information about a `coupon/referral` code"""
-        r = self.__make_request("GET", f"/coupons/{coupon_code}")
+        r = HoneyGain.__make_request("GET", f"/coupons/{coupon_code}")
 
         return r.json()
 

@@ -247,8 +247,8 @@ user.set_proxy("ip:port")
     from pyHoneygain import Honeygain
 
     Honeygain.coupon("freemoney") # valid (as of Apr 25, 2022)
-    Honeygain.coupon("get5") # expired
-    Honeygain.coupon("get6") # invalid
+    Honeygain.coupon("get5") # expired (as of Apr 25, 2022)
+    Honeygain.coupon("get6") # invalid (as of Apr 25, 2022)
     ```
 
 ---
