@@ -244,11 +244,11 @@ user.set_proxy("ip:port")
 17. Check for a coupon code
 
     ```PYTHON
-    from pyHoneygain import Honeygain
+    from pyHoneygain import HoneyGain
 
-    Honeygain.coupon("freemoney") # valid (as of Apr 25, 2022)
-    Honeygain.coupon("get5") # expired (as of Apr 25, 2022)
-    Honeygain.coupon("get6") # invalid (as of Apr 25, 2022)
+    HoneyGain.coupon("freemoney") # valid (as of Apr 25, 2022)
+    HoneyGain.coupon("get5") # expired (as of Apr 25, 2022)
+    HoneyGain.coupon("get6") # invalid (as of Apr 25, 2022)
     ```
 
 ---
