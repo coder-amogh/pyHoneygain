@@ -243,6 +243,16 @@ class HoneyGain:
 
         return honeypot_data if r.ok else False
 
+    def get_honeypot_status(self):
+        """Get the honeypot status (bytes shared till today and if opened or not). """
+        self.handle_not_logged_in()
+
+        r = self.__make_request("GET", "/contest_winnings")
+
+        honeypot_data = r.json().get("data", None)
+
+        return honeypot_data if r.ok else False
+    
     def actions_stop_honeypot_process(self, campaign_id: str, notification_hash: str) -> bool:
         """Stops the process to claim honeypot. """
         self.handle_not_logged_in()
@@ -298,26 +308,23 @@ class HoneyGain:
         count = 0
 
         while count < retry_count:
-            notifications = self.notifications()
+            count += 1
 
-            for notification in notifications:
-                if notification["template"] == "lucky_pot":
-                    self.actions_start_claim_honeypot_process(
-                        campaign_id=notification["campaign_id"], notification_hash=notification["hash"])
+            status = self.get_honeypot_status()
 
-                    credits = self.actions_accept_honeypot()
+            if status:
+                winning_credits = status["winning_credits"]
 
-                    self.actions_stop_honeypot_process(
-                        campaign_id=notification["campaign_id"], notification_hash=notification["hash"])
+                if winning_credits is None:
+                    credits_earned = self.actions_accept_honeypot()
 
-                    return {
-                        "success": True,
-                        "credits": credits,
-                    }
+                    if credits_earned:
+                        return {
+                            "success": True,
+                            "credits": credits_earned,
+                        }
 
             time.sleep(delay)
-
-            count += 1
 
         return {
             "success": False,
