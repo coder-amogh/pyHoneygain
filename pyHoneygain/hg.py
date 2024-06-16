@@ -112,7 +112,7 @@ class HoneyGain:
         if self.jwt is None:
             raise NotLoggedInError
 
-    def handle_version_deprecated_error(self, allow_list: list[str]):
+    def handle_version_deprecated_error(self, allow_list: list):
         if self.API_VERSION not in allow_list:
             raise DeprecatedEndpointError
 
