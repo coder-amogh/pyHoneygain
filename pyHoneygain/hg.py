@@ -6,13 +6,33 @@ from .exceptions import *
 class HoneyGain:
     def __init__(self, API_PREFIX_URL: str = "/api", API_VERSION: str = "/v1", API_DOMAIN: str = "https://dashboard.honeygain.com") -> None:
         """Initialise HoneyGain API Client. """
-        self.API_VERSION = API_VERSION
-        self.API_PREFIX_URL = API_PREFIX_URL
-        self.API_DOMAIN = API_DOMAIN
-        self.API_BASE_URL = f'{self.API_DOMAIN}{self.API_PREFIX_URL}{self.API_VERSION}'
+        self.set_api_version(API_VERSION, reload = False)
+        self.set_api_prefix_url(API_PREFIX_URL, reload = False)
+        self.set_api_domain(API_DOMAIN, reload = True)
         self.jwt = None
         self.user_id = None
         self.remove_proxy()
+
+    def set_api_version(self, version: str, reload = True):
+        self.API_VERSION = version
+
+        if reload:
+            self.reload_api_base_url()
+
+    def set_api_domain(self, domain: str, reload = True):
+        self.API_DOMAIN = domain
+
+        if reload:
+            self.reload_api_base_url()
+
+    def set_api_prefix_url(self, prefix_url: str, reload = True):
+        self.API_PREFIX_URL = prefix_url
+
+        if reload:
+            self.reload_api_base_url()
+
+    def reload_api_base_url(self):
+        self.API_BASE_URL = f'{self.API_DOMAIN}{self.API_PREFIX_URL}{self.API_VERSION}'
 
     def __make_request(self, req_type: str, endpoint: str, headers: dict = {}, *args, **kwargs):
         """Helper function to make requests. """
@@ -91,6 +111,10 @@ class HoneyGain:
     def handle_not_logged_in(self):
         if self.jwt is None:
             raise NotLoggedInError
+
+    def handle_version_deprecated_error(self, allow_list: list[str]):
+        if self.API_VERSION not in allow_list:
+            raise DeprecatedEndpointError
 
     def preset_user_id(self):
         if self.user_id is None:
@@ -338,15 +362,30 @@ class HoneyGain:
         """Add JumpTask (BSC) Wallet to honeygain account"""
         self.handle_not_logged_in()
 
+        self.handle_version_deprecated_error(allow_list = ["/v2"])
+
         r = self.__make_request(
             "PATCH",
             "/settings/jt",
-            json={
+            json = {
                 "jt_toggle": True,
-                "jt_key": wallet_address
+                "jt_key": wallet_address,
+                "login_type": None,
+                "wallet": "account_id",
             }
         )
+
         if r.status_code == 403 and r.json()["title"] == "user_confirmation_required":
             # Need user confirmation
             raise UserConfirmationRequiredError
         return True
+
+    def get_bsc_wallet_settings(self):
+        """Get existing JumpTask (BSC) Wallet settings"""
+        self.handle_not_logged_in()
+
+        r = self.__make_request("GET", "/settings/jt")
+
+        payouts_data = r.json().get("data", None)
+
+        return payouts_data if r.ok else False

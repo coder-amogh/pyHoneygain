@@ -12,3 +12,8 @@ class UserConfirmationRequiredError(HoneygainAPIError):
 	"""Raised when user confirmation is required. """
 	def __init__(self, *args: object) -> None:
 		super().__init__(*args)
+
+class DeprecatedEndpointError(HoneygainAPIError):
+	"""Raised when the endpoint is deprecated. """
+	def __init__(self, *args: object) -> None:
+		super().__init__(*args)
