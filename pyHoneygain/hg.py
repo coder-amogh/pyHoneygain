@@ -229,7 +229,7 @@ class HoneyGain:
     @staticmethod
     def coupon(coupon_code):
         """Returns information about a `coupon/referral` code"""
-        r = HoneyGain.__make_request("GET", f"/coupons/{coupon_code}")
+        r = HoneyGain.__make_request(HoneyGain(), "GET", f"/coupons/{coupon_code}")
 
         return r.json()
 
