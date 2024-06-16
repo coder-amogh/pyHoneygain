@@ -327,6 +327,15 @@ class HoneyGain:
         })
 
         return r.ok
+    
+    def get_confirmation_email(self,) -> bool:
+        """Requests a confirmation email from the server. Was not needed in prior versions. """
+
+        self.handle_not_logged_in()
+
+        r = self.__make_request("POST", "/users/confirmation_tokens")
+
+        return r.ok
 
     def open_honeypot(self, retry_count: int = 5, delay: int = 2):
         count = 0
