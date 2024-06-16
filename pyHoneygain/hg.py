@@ -327,8 +327,8 @@ class HoneyGain:
         })
 
         return r.ok
-    
-    def get_confirmation_email(self,) -> bool:
+
+    def get_confirmation_email(self) -> bool:
         """Requests a confirmation email from the server. Was not needed in prior versions. """
 
         self.handle_not_logged_in()
@@ -367,7 +367,7 @@ class HoneyGain:
     def __repr__(self):
         return f"<HoneyGain Object at: {hex(id(self))}>"
 
-    def link_bsc_wallet(self, wallet_address: str):
+    def link_bsc_wallet(self, wallet_address: str) -> bool:
         """Add JumpTask (BSC) Wallet to honeygain account"""
         self.handle_not_logged_in()
 
@@ -389,7 +389,7 @@ class HoneyGain:
             raise UserConfirmationRequiredError
         return True
 
-    def get_bsc_wallet_settings(self):
+    def get_bsc_wallet_settings(self) -> bool:
         """Get existing JumpTask (BSC) Wallet settings"""
         self.handle_not_logged_in()
 
